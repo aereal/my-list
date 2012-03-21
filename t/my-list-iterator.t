@@ -14,4 +14,16 @@ subtest initialize => sub {
     new_ok 'My::List::Iterator';
 };
 
+subtest has_next => sub {
+    subtest no_element_given => sub {
+        my $iterator = My::List::Iterator->new();
+        ok not $iterator->has_next;
+    };
+
+    subtest element_given => sub {
+        my $iterator = My::List::Iterator->new(1);
+        ok $iterator->has_next;
+    };
+};
+
 done_testing;
