@@ -4,6 +4,7 @@ use warnings;
 use base qw(Test::Class);
 use 5.010;
 use Test::More;
+use Test::Name::FromLine;
 
 use lib '../lib';
 
