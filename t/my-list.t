@@ -9,3 +9,9 @@ use Test::Name::FromLine;
 use lib '../lib';
 
 use My::List;
+
+subtest initialize => sub {
+  new_ok 'My::List';
+};
+
+done_testing;
