@@ -1,5 +1,8 @@
 use strict;
 use warnings;
-use Test::More tests => 1;
+use Test::More tests => 2;
 
-BEGIN { use_ok 'My::List' }
+BEGIN {
+    use_ok 'My::List';
+    use_ok 'My::List::Iterator';
+}
