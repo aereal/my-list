@@ -33,4 +33,23 @@ subtest head => sub {
     };
 };
 
+subtest tail => sub {
+    subtest given_with_no_elements => sub {
+        my $list = My::List->new;
+        is $list->tail, undef;
+    };
+
+    subtest given_with_1_element => sub {
+        my $given = 0;
+        my $list = My::List->new($given);
+        is $list->tail, undef;
+    };
+
+    subtest given_with_many_elements => sub {
+        my $given_array = [0..10];
+        my $list = My::List->new(@$given_array);
+        is ref($list->tail), 'My::List', 'should be a instance of My::List';
+    };
+};
+
 done_testing;
