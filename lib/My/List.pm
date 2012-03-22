@@ -59,4 +59,13 @@ sub map {
     }
 }
 
+sub each {
+    my ($self, $callback) = @_;
+    unless ($self->is_empty) {
+        my $iterator = $self->iterator;
+        $callback->($iterator->next) while $iterator->has_next;
+    }
+    $self;
+}
+
 1;

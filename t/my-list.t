@@ -150,4 +150,24 @@ subtest map => sub {
     };
 };
 
+subtest each => sub {
+    subtest given_nil => sub {
+        my $list = My::List->nil;
+        my $called = [];
+
+        $list->each(sub { push @$called, $_[0] });
+
+        is_deeply $called, [];
+    };
+
+    subtest given_empty => sub {
+        my $list = My::List->new;
+        my $called = [];
+
+        $list->each(sub { push @$called, $_[0] });
+
+        is_deeply $called, [];
+    };
+};
+
 done_testing;
