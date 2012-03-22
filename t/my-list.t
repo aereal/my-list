@@ -17,7 +17,7 @@ subtest initialize => sub {
 subtest head => sub {
     subtest given_with_no_elements => sub {
         my $list = My::List->new;
-        ok not $list->head;
+        is $list->head, undef;
     };
 
     subtest given_with_1_element => sub {
@@ -36,19 +36,43 @@ subtest head => sub {
 subtest tail => sub {
     subtest given_with_no_elements => sub {
         my $list = My::List->new;
-        is $list->tail, undef;
+        ok $list->tail->is_nil;
     };
 
     subtest given_with_1_element => sub {
         my $given = 0;
         my $list = My::List->new($given);
-        is $list->tail, undef;
+        ok $list->tail->is_nil;
     };
 
     subtest given_with_many_elements => sub {
         my $given_array = [0..10];
         my $list = My::List->new(@$given_array);
         is ref($list->tail), 'My::List', 'should be a instance of My::List';
+    };
+};
+
+subtest is_nil => sub {
+    subtest given_nil => sub {
+        my $nil = My::List->nil;
+        ok $nil->is_nil;
+    };
+
+    subtest given_with_no_elements => sub {
+        my $list = My::List->new;
+        ok not $list->is_nil;
+    };
+
+    subtest given_with_1_element => sub {
+        my $given = 'a';
+        my $list = My::List->new($given);
+        ok not $list->is_nil;
+    };
+
+    subtest given_with_many_elements => sub {
+        my $given_array = [0..10];
+        my $list = My::List->new(@$given_array);
+        ok not $list->is_nil;
     };
 };
 
