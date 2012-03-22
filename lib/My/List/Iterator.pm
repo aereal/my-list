@@ -1,12 +1,14 @@
 package My::List::Iterator;
 use strict;
 use warnings;
+use base 'Class::Accessor::Fast';
+
+__PACKAGE__->mk_accessors(qw/list/);
 
 sub new {
-    my ($class) = shift;
-    my $self = {collection => shift};
-    bless $self, $class;
-    return $self;
+    my ($class, $list) = @_;
+    die "The instance of My::List should be given" unless defined($list) && ref($list) eq 'My::List';
+    $class->SUPER::new({list => $list});
 }
 
 sub has_next {

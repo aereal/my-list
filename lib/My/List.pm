@@ -46,7 +46,8 @@ sub has_next {
 }
 
 sub iterator {
-    My::List::Iterator->new;
+    my $self = shift;
+    My::List::Iterator->new($self);
 }
 
 1;

@@ -4,14 +4,26 @@ use warnings;
 use base qw(Test::Class);
 use 5.010;
 use Test::More;
+use Test::Exception;
 use Test::Name::FromLine;
 
 use lib '../lib';
 
+use My::List;
 use My::List::Iterator;
 
 subtest initialize => sub {
-    new_ok 'My::List::Iterator';
+    subtest without_list => sub {
+        throws_ok { My::List::Iterator->new } qr/My::List should be given/;
+    };
+
+    subtest with_list => sub {
+        lives_ok { My::List::Iterator->new(My::List->new) };
+
+        my $list = My::List->new;
+        my $iterator = My::List::Iterator->new($list);
+        is $iterator->list, $list;
+    };
 };
 
 subtest has_next => sub {
