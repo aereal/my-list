@@ -20,6 +20,15 @@ sub new {
     });
 }
 
+sub build {
+    my ($class, $head, $tail) = @_;
+    die "Can't build" unless defined($tail) && ref($tail) eq __PACKAGE__;
+    $class->SUPER::new({
+        head => $head,
+        tail => $tail
+    });
+}
+
 sub is_nil {
     my $self = shift;
     $self == $nil;
