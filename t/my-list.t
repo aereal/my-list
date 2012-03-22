@@ -14,4 +14,23 @@ subtest initialize => sub {
     new_ok 'My::List';
 };
 
+subtest head => sub {
+    subtest given_with_no_elements => sub {
+        my $list = My::List->new;
+        ok not $list->head;
+    };
+
+    subtest given_with_1_element => sub {
+        my $given = 0;
+        my $list = My::List->new($given);
+        is $list->head, $given;
+    };
+
+    subtest given_with_many_elements => sub {
+        my $given_array = [0..10];
+        my $list = My::List->new(@$given_array);
+        is $list->head, $given_array->[0];
+    };
+};
+
 done_testing;
