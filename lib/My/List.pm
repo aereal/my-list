@@ -1,6 +1,7 @@
 package My::List;
 use strict;
 use warnings;
+use My::List::Iterator;
 
 use base 'Class::Accessor::Fast';
 
@@ -43,6 +44,9 @@ sub has_next {
     my $self = shift;
     !$self->tail->is_nil;
 }
+
+sub iterator {
+    My::List::Iterator->new;
 }
 
 1;

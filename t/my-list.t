@@ -122,4 +122,9 @@ subtest build => sub {
     };
 };
 
+subtest iterator => sub {
+    my $list = My::List->new;
+    cmp_ok ref($list->iterator), 'eq', 'My::List::Iterator';
+};
+
 done_testing;
