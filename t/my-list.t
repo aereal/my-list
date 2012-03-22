@@ -76,4 +76,16 @@ subtest is_nil => sub {
     };
 };
 
+subtest is_empty => sub {
+    subtest given_with_no_elements => sub {
+        my $list = My::List->new;
+        ok $list->is_empty;
+    };
+
+    subtest given_with_1_element => sub {
+        my $list = My::List->new('a');
+        ok not $list->is_empty;
+    };
+};
+
 done_testing;

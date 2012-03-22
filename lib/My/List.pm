@@ -24,6 +24,11 @@ sub is_nil {
     my $self = shift;
     $self == $nil;
 }
+
+sub is_empty {
+    my $self = shift;
+    !defined $self->head;
+}
 }
 
 1;
