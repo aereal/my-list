@@ -29,6 +29,11 @@ sub is_empty {
     my $self = shift;
     !defined $self->head;
 }
+
+sub has_next {
+    my $self = shift;
+    !$self->tail->is_nil;
+}
 }
 
 1;

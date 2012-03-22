@@ -88,4 +88,21 @@ subtest is_empty => sub {
     };
 };
 
+subtest has_next => sub {
+    subtest given_with_no_elements => sub {
+        my $list = My::List->new;
+        ok not $list->has_next;
+    };
+
+    subtest given_with_1_element => sub {
+        my $list = My::List->new('a');
+        ok not $list->has_next;
+    };
+
+    subtest given_with_many_elements => sub {
+        my $list = My::List->new(1..10);
+        ok $list->has_next;
+    };
+};
+
 done_testing;
