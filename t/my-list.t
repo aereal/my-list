@@ -170,4 +170,18 @@ subtest each => sub {
     };
 };
 
+subtest reduce => sub {
+    subtest with_integers_and_addition => sub {
+        my $list = My::List->new(1, 2, 3);
+        my $result = $list->reduce(sub { $_[0] + $_[1] }, 0);
+        is $result, 6;
+    };
+
+    subtest with_strings_and_concatanation => sub {
+        my $list = My::List->new(qw/H e l l o/);
+        my $result = $list->reduce(sub { $_[0] . $_[1] }, '');
+        is $result, 'Hello';
+    };
+};
+
 done_testing;

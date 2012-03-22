@@ -68,4 +68,13 @@ sub each {
     $self;
 }
 
+sub reduce {
+    my ($self, $callback, $memo) = @_;
+    if ($self->tail->is_nil) {
+        $callback->($self->head, $memo);
+    } else {
+        $callback->($self->head, $self->tail->reduce($callback, $memo));
+    }
+}
+
 1;
