@@ -46,4 +46,31 @@ subtest has_next => sub {
     };
 };
 
+subtest next => sub {
+    subtest not_have_next_value => sub {
+        my $list = My::List->new;
+
+        subtest yield_value => sub {
+            my $iterator = My::List::Iterator->new($list);
+
+            throws_ok { $iterator->next } qr/Reached end of iterator/;
+        };
+    };
+
+    subtest have_next_value => sub {
+        my $list = My::List->new('a', 'b', 'c');
+
+        subtest yield_value => sub {
+            my $iterator = My::List::Iterator->new($list);
+
+            is_deeply [$iterator->list->head], ['a'];
+
+            my $yielded = $iterator->next;
+            is_deeply [$yielded], ['a'], 'Yield a value';
+
+            is_deeply [$iterator->list->head], ['b'], 'Then iterated';
+        };
+    };
+};
+
 done_testing;

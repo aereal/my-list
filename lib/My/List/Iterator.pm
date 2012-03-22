@@ -16,4 +16,15 @@ sub has_next {
     !$self->list->is_empty;
 }
 
+sub next {
+    my $self = shift;
+    if ($self->has_next) {
+        my $yielded = $self->list->head;
+        $self->list($self->list->tail);
+        $yielded;
+    } else {
+        die "Reached end of iterator";
+    }
+}
+
 1;
