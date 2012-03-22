@@ -12,7 +12,8 @@ sub new {
 }
 
 sub has_next {
-    return scalar(shift->{collection});
+    my $self = shift;
+    !$self->list->is_empty;
 }
 
 1;

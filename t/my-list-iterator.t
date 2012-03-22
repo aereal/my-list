@@ -27,13 +27,21 @@ subtest initialize => sub {
 };
 
 subtest has_next => sub {
-    subtest no_element_given => sub {
-        my $iterator = My::List::Iterator->new();
+    subtest given_list_with_no_elements => sub {
+        my $list = My::List->new;
+        my $iterator = My::List::Iterator->new($list);
         ok not $iterator->has_next;
     };
 
-    subtest element_given => sub {
-        my $iterator = My::List::Iterator->new(1);
+    subtest given_with_one_element => sub {
+        my $list = My::List->new('x');
+        my $iterator = My::List::Iterator->new($list);
+        ok $iterator->has_next;
+    };
+
+    subtest given_list_with_many_elements => sub {
+        my $list = My::List->new(1..10);
+        my $iterator = My::List::Iterator->new($list);
         ok $iterator->has_next;
     };
 };
