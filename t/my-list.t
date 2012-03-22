@@ -128,4 +128,26 @@ subtest iterator => sub {
     is $list->iterator->list, $list;
 };
 
+subtest map => sub {
+    my $callback = sub { scalar($_[0]) };
+
+    subtest given_nil => sub {
+        my $list = My::List->nil;
+
+        is $list->map($callback), $list;
+    };
+
+    subtest given_empty => sub {
+        my $list = My::List->new;
+
+        is $list->map($callback), $list;
+    };
+
+    subtest given_with_some_elements => sub {
+        my $list = My::List->new(1, 2, 3);
+
+        is_deeply [$list->map(sub { $_[0] * 2 })->head], [My::List->new(2, 4, 6)->head];
+    };
+};
+
 done_testing;

@@ -50,4 +50,13 @@ sub iterator {
     My::List::Iterator->new($self);
 }
 
+sub map {
+    my ($self, $callback) = @_;
+    if ($self->is_empty) {
+        $self
+    } else {
+        My::List->build($callback->($self->head), $self->tail->map($callback));
+    }
+}
+
 1;
