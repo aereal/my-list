@@ -171,6 +171,12 @@ subtest each => sub {
 };
 
 subtest reduce => sub {
+    subtest 'list is nil' => sub {
+        my $list = My::List->nil;
+        my $result = $list->reduce(sub { $_[0] + $_[1] }, 0);
+        is $result, undef;
+    };
+
     subtest with_integers_and_addition => sub {
         my $list = My::List->new(1, 2, 3);
         my $result = $list->reduce(sub { $_[0] + $_[1] }, 0);

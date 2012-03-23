@@ -70,6 +70,7 @@ sub each {
 
 sub reduce {
     my ($self, $callback, $memo) = @_;
+    return if $self->is_nil;
     if ($self->tail->is_nil) {
         $callback->($self->head, $memo);
     } else {
