@@ -1,0 +1,49 @@
+=head1 NAME
+
+My::List
+
+=head1 SYNOPSIS
+
+    use My::List;
+
+    my $list = My::List->new(1, 2, 3); # -> My::List(1, My::List(2, My::List(3, My::List->nil)))
+
+    $list->map(sub { $_[0] * 2 }); # -> My::List(2, My::List(4, My::List(6, My::List->nil)))
+
+    $list->reduce(sub { $_[0] + $_[1] }, 0); # -> 6
+
+    $list->each(sub { print $_[0], "\n" });
+    # 1
+    # 2
+    # 3
+
+    my $appended = $list->link(4, 5, 6);
+    # -> My::List(1, My::List(2, My::List(3, My::List(4, My::List(5, My::List(6, My::List->nil))))))
+    $appended->each(sub { print $_[0], "\n" });
+    # 1
+    # 2
+    # 3
+    # 4
+    # 5
+    # 6
+
+    # External Iterator
+    my $iterator = $list->iterator;
+
+    print $iterator->next, "\n" while $iterator->has_next;
+    # 1
+    # 2
+    # 3
+
+=head1 DESCRIPTION
+
+Yet another linked-list implementation.
+
+This works is for learning Perl.
+
+=head1 SEE ALSO
+
+=head1 LICENSE
+
+This library is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
