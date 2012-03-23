@@ -203,4 +203,14 @@ subtest to_array => sub {
     };
 };
 
+subtest link => sub {
+    subtest 'list has elements' => sub {
+        my $init_values = [qw/a b c/];
+        my $list = My::List->new(@$init_values);
+        my $args = [qw/d e f/];
+        my $linked = $list->link(@$args);
+        is_deeply $linked->to_array, [@$init_values, @$args];
+    };
+};
+
 done_testing;

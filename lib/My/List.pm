@@ -83,4 +83,10 @@ sub to_array {
     $self->reduce(sub { [$_[0], @{$_[1]}] }, []);
 }
 
+sub link {
+    my ($self, @args) = @_;
+    my $array = $self->to_array;
+    My::List->new(@$array, @args);
+}
+
 1;
