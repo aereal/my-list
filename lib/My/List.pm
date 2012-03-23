@@ -78,4 +78,9 @@ sub reduce {
     }
 }
 
+sub to_array {
+    my $self = shift;
+    $self->reduce(sub { [$_[0], @{$_[1]}] }, []);
+}
+
 1;

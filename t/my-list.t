@@ -190,4 +190,17 @@ subtest reduce => sub {
     };
 };
 
+subtest to_array => sub {
+    subtest 'list is nil' => sub {
+        my $list = My::List->nil;
+        is_deeply [$list->to_array], [];
+    };
+
+    subtest 'list has elements' => sub {
+        my $args = [qw/a b c/];
+        my $list = My::List->new(@$args);
+        is_deeply $list->to_array, [@$args];
+    };
+};
+
 done_testing;
