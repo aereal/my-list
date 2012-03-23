@@ -5,7 +5,7 @@ use base qw(Test::Class);
 use 5.010;
 use Test::More;
 use Test::Name::FromLine;
-use Test::Exception;
+use Test::Fatal qw/exception lives_ok/;
 
 use lib '../lib';
 
@@ -108,7 +108,7 @@ subtest has_next => sub {
 
 subtest build => sub {
     subtest given_one_arg => sub {
-        throws_ok { My::List->build('a') } qr/Can't build/;
+        like exception { My::List->build('a') }, qr/Can't build/;
     };
 
     subtest given_two_args => sub {
@@ -117,7 +117,7 @@ subtest build => sub {
         };
 
         subtest second_is_not_my_list => sub {
-            throws_ok { My::List->build('fuga', 'hoge') } qr/Can't build/;
+            like exception { My::List->build('fuga', 'hoge') }, qr/Can't build/;
         };
     };
 };

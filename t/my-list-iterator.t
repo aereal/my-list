@@ -4,7 +4,7 @@ use warnings;
 use base qw(Test::Class);
 use 5.010;
 use Test::More;
-use Test::Exception;
+use Test::Fatal qw/exception lives_ok/;
 use Test::Name::FromLine;
 
 use lib '../lib';
@@ -14,7 +14,7 @@ use My::List::Iterator;
 
 subtest initialize => sub {
     subtest without_list => sub {
-        throws_ok { My::List::Iterator->new } qr/My::List should be given/;
+        like exception { My::List::Iterator->new }, qr/My::List should be given/;
     };
 
     subtest with_list => sub {
@@ -53,7 +53,7 @@ subtest next => sub {
         subtest yield_value => sub {
             my $iterator = My::List::Iterator->new($list);
 
-            throws_ok { $iterator->next } qr/Reached end of iterator/;
+            like exception { $iterator->next }, qr/Reached end of iterator/;
         };
     };
 
