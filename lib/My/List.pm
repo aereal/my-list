@@ -52,10 +52,11 @@ sub iterator {
 
 sub map {
     my ($self, $callback) = @_;
+    my $class = ref $self;
     if ($self->is_empty) {
         $self
     } else {
-        My::List->build($callback->($self->head), $self->tail->map($callback));
+        $class->build($callback->($self->head), $self->tail->map($callback));
     }
 }
 
@@ -85,8 +86,9 @@ sub to_array {
 
 sub link {
     my ($self, @args) = @_;
+    my $class = ref $self;
     my $array = $self->to_array;
-    My::List->new(@$array, @args);
+    $class->new(@$array, @args);
 }
 
 1;
