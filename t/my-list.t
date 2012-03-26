@@ -49,7 +49,7 @@ subtest tail => sub {
     subtest given_with_many_elements => sub {
         my $given_array = [0..10];
         my $list = My::List->new(@$given_array);
-        is ref($list->tail), 'My::List', 'should be a instance of My::List';
+        ok $list->tail->isa('My::List');
     };
 };
 
@@ -124,7 +124,7 @@ subtest build => sub {
 
 subtest iterator => sub {
     my $list = My::List->new;
-    cmp_ok ref($list->iterator), 'eq', 'My::List::Iterator';
+    ok $list->iterator->isa('My::List::Iterator');
     is $list->iterator->list, $list;
 };
 
