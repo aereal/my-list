@@ -1,7 +1,7 @@
 package My::List::Iterator;
 use strict;
 use warnings;
-use base 'Class::Accessor::Fast';
+use parent 'Class::Accessor::Fast';
 
 __PACKAGE__->mk_accessors(qw/list/);
 

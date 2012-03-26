@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use My::List::Iterator;
 
-use base 'Class::Accessor::Fast';
+use parent 'Class::Accessor::Fast';
 
 __PACKAGE__->mk_accessors(qw/head tail/);
 
